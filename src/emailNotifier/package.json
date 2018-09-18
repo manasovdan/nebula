@@ -1,0 +1,7 @@
+{
+  "name": "reviewProcessor",
+  "version": "0.0.1",
+  "dependencies": {
+    "kue": "^0.11.6"
+  }
+}
