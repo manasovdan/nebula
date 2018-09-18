@@ -5,9 +5,24 @@ services:
     build:
       context: ./src
       dockerfile: API.Dockerfile
-    working_dir: /src
     ports:
       - 3000:3000
+    env_file:
+      - development.env
+
+  review_processor:
+    depends_on: [postgres, redis]
+    build:
+      context: ./src
+      dockerfile: RPW.Dockerfile
+    env_file:
+      - development.env
+
+  email_sender:
+    depends_on: [redis]
+    build:
+      context: ./src
+      dockerfile: ENW.Dockerfile
     env_file:
       - development.env
 

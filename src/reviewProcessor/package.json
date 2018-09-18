@@ -2,6 +2,9 @@
   "name": "reviewProcessor",
   "version": "0.0.1",
   "dependencies": {
-    "kue": "^0.11.6"
+    "kue": "^0.11.6",
+    "pg": "^7.4.3",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.38.1"
   }
 }
