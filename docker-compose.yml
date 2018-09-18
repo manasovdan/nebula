@@ -1,6 +1,8 @@
 version: "3.2"
 services:
-  db:
+  postgres:
+    env_file:
+      - postgres.env
     container_name: postgres
     build:
           context: .

@@ -1,10 +1,20 @@
 const express = require('express');
+const Sequelize = require('sequelize');
+const models = require('../models');
 
 const router = express.Router();
 
-/* GET home page. */
 router.post('/reviews', (req, res) => {
-  res.status(200).json({ test: 'success' });
+  models.review.create(req.body)
+    .then((product) => {
+      res.status(200).json(product);
+    })
+    .catch((err) => {
+      if (err instanceof Sequelize.ForeignKeyConstraintError) {
+        return res.status(404).json(err);
+      }
+      return res.status(500).json(err);
+    });
 });
 
 module.exports = router;
