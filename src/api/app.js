@@ -19,7 +19,7 @@ app.use('/api', apiRouter);
 // catch 404
 app.use((_, res) => res.sendStatus(404));
 
-models.sequelize.sync().then(function() {
-  app.listen(PORT, () => console.info(`API is running on ${PORT} port`));
-});
-
+models.sequelize.sync()
+  .then(() => {
+    app.listen(PORT, () => console.info(`API is running on ${PORT} port`));
+  });

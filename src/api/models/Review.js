@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       reviewID: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
       name: DataTypes.STRING,
       email: DataTypes.STRING,
-      text: DataTypes.STRING,
+      review: DataTypes.STRING,
     },
     {
       timestamps: false,
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   );
 
   review.associate = (models) => {
-    models.review.belongsTo(models.product, {foreignKey: 'productid'});
+    models.review.belongsTo(models.product, { foreignKey: 'productid', targetKey: 'productid' });
   };
 
   return review;
