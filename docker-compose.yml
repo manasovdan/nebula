@@ -1,8 +1,19 @@
 version: "3.2"
 services:
+  api:
+    depends_on: [postgres, redis]
+    build:
+      context: ./src
+      dockerfile: API.Dockerfile
+    working_dir: /src
+    ports:
+      - 3000:3000
+    env_file:
+      - development.env
+
   postgres:
     env_file:
-      - postgres.env
+      - development.env
     container_name: postgres
     image: heimirthor/adventureworksforpostgres_db
     ports:

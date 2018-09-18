@@ -6,6 +6,10 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       email: DataTypes.STRING,
       review: DataTypes.STRING,
+      status: {
+        type: DataTypes.ENUM,
+        values: ['published', 'pending', 'archived'],
+      },
     },
     {
       timestamps: false,

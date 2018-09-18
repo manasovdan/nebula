@@ -1,6 +1,7 @@
 const kue = require('kue');
 const redisConfig = require('../config/redis');
 const badWords = require('./badWords');
+const dbModels = require('../models');
 
 const badWordsFilter = new RegExp(`\\b(${badWords.join('|')})\\b`, 'gi');
 
@@ -12,11 +13,21 @@ function containsBadWords(message) {
 }
 
 function processReview(review, done) {
+  let status = 'published';
   if (containsBadWords(review.review)) {
-    return console.info('bad review');
+    status = 'archived';
   }
-  console.info('passed review');
-  return done();
+  dbModels.review.update({ status }, { where: { reviewID: review.reviewID } })
+    .then(() => {
+      queue.create('notification', {
+        email: review.email,
+        status,
+      })
+        .save((err) => {
+          if (err) console.error(err);// TODO add logger
+          done();
+        });
+    });
 }
 
 queue.on('error', err => console.log('Oops... ', err))

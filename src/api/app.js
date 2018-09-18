@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const apiRouter = require('./routes/api');
-const models = require('./models');
+const models = require('../models');
 
 const PORT = +(process.env.PORT || '3000');
 

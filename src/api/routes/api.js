@@ -2,7 +2,7 @@ const express = require('express');
 const Sequelize = require('sequelize');
 const Kue = require('kue');
 
-const models = require('../models');
+const models = require('../../models');
 const redisConfig = require('../../config/redis');
 
 const router = express.Router();
@@ -15,7 +15,7 @@ router.post('/reviews', (req, res) => {
       queue.create('review', review)
         .save((err) => {
           if (err) return console.error(err);// TODO add logger
-          console.info('Job created')
+          console.info('Job created');
         });
       res.status(200).json({
         success: true,
