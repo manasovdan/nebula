@@ -3,11 +3,11 @@ FROM library/postgres
 RUN apt-get update
 RUN apt-get -y install unzip ruby dos2unix
 
-RUN mkdir /data1
-COPY install.sql /data1/
-COPY update_csvs.rb /data1/
-COPY adventure_works_2014_OLTP_script.zip /data1/
-RUN cd /data1 && \
+RUN mkdir /data
+COPY install.sql /data/
+COPY update_csvs.rb /data/
+COPY adventure_works_2014_OLTP_script.zip /data/
+RUN cd /data && \
     unzip adventure_works_2014_OLTP_script.zip && \
     rm adventure_works_2014_OLTP_script.zip && \
     ruby update_csvs.rb && \
