@@ -9,6 +9,9 @@ services:
       - 3000:3000
     env_file:
       - development.env
+    links:
+      - postgres
+      - redis
 
   review_processor:
     depends_on: [postgres, redis]
@@ -17,6 +20,9 @@ services:
       dockerfile: RPW.Dockerfile
     env_file:
       - development.env
+    links:
+      - postgres
+      - redis
 
   email_sender:
     depends_on: [redis]
@@ -25,6 +31,8 @@ services:
       dockerfile: ENW.Dockerfile
     env_file:
       - development.env
+    links:
+      - redis
 
   postgres:
     env_file:
